@@ -1,10 +1,10 @@
-const { postCreatedEvent } = require('../../../events/post-created');
-const { LoggerService } = require('../../../infrastructure/domain-logger.service');
+const { postCreatedEvent } = require('../../events/post-created');
+const { LoggerService } = require('../../infrastructure/domain-logger.service');
 const { errorResult } = require('../error.result');
 const { createPostSchema } = require('./create-post.schema');
-const todosGatewayService = require('../../../gateways/services/posts/posts.service');
-const { createPostCommandResult } = require('./create-post.command.result');
-const usersRepository = require('../../../gateways/repositories/user/user.repository');
+const todosGatewayService = require('../../gateways/services/posts/posts.service');
+const { createPostResult } = require('./create-post.result');
+const usersRepository = require('../../gateways/repositories/user/user.repository');
 
 const CREATE_POST_INVALID_REQUEST = 'CREATE_POST_INVALID_REQUEST';
 const CREATE_POST_INVALID_USER = 'CREATE_POST_INVALID_USER';
@@ -28,9 +28,9 @@ const createPost = async (createPostCommand) => {
 
   logger.debug('create-post.service - checking if userId is valid');
 
-  const userModel = await usersRepository.getUserById(createPostCommand.userId);
+  const userEntity = await usersRepository.getUserById(createPostCommand.userId);
 
-  if (!userModel) {
+  if (!userEntity) {
     logger.debug(`create-post.service - userId ${createPostCommand.userId} is invalid`);
 
     return errorResult(CREATE_POST_INVALID_USER, `userId ${createPostCommand.userId} is invalid`);
@@ -46,11 +46,11 @@ const createPost = async (createPostCommand) => {
 
   logger.debug('create-post.service - post created!');
 
-  logger.trace(`create-post.service - createPostCommandResult is: ${JSON.stringify(createPostDTO)}`);
+  logger.trace(`create-post.service - createPostResult is: ${JSON.stringify(createPostDTO)}`);
 
   logger.info('create-post.service - finish createPost');
 
-  return createPostCommandResult(createPostDTO);
+  return createPostResult(createPostDTO);
 };
 
 module.exports = {

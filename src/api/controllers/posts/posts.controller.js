@@ -1,7 +1,7 @@
 const express = require('express');
-const postService = require('../../../domain/use-cases/posts/create-post/create-post.service');
+const postService = require('../../../domain/use-cases/create-post/create-post.service');
 // const logger = require('../../../domain/infrastructure/logger.service');
-const { CreatePostCommand } = require('../../../domain/use-cases/posts/create-post/create-post.command');
+const { CreatePostCommand } = require('../../../domain/use-cases/create-post/create-post.command');
 
 const router = express.Router();
 

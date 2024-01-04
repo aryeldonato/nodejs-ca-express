@@ -1,5 +1,4 @@
 const axios = require('axios').default;
-// const { Client } = require('pg');
 
 const { CreatePostCommand } = require('./create-post.command');
 const createPostService = require('./create-post.service');

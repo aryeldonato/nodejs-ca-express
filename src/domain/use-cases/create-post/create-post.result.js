@@ -1,5 +1,5 @@
-const createPostCommandResult = (data) => ({
-  createPostCommandResult: {
+const createPostResult = (data) => ({
+  createPostResult: {
     id: data.id,
     userId: data.userId,
     tittle: data.tittle,
@@ -8,5 +8,5 @@ const createPostCommandResult = (data) => ({
 });
 
 module.exports = {
-  createPostCommandResult,
+  createPostResult,
 };

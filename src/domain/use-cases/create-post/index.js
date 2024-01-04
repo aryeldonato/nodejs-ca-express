@@ -1,9 +1,9 @@
 const createPostService = require('./create-post.service');
-const createPostCommandResult = require('./create-post.command.result');
+const createPostResult = require('./create-post.result');
 const createPostCommand = require('./create-post.command');
 
 module.exports = {
   createPostService,
   createPostCommand,
-  createPostCommandResult,
+  createPostResult,
 };
