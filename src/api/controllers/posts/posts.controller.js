@@ -6,7 +6,15 @@ const { CreatePostCommand } = require('../../../domain/use-cases/create-post/cre
 const router = express.Router();
 
 router.post('/posts', async (req, res) => {
-  const createPostCmd = new CreatePostCommand(req.body.userId, req.body.tittle, req.body.body);
+  const correlationId = req.headers['x-correlation-id'];
+
+  const createPostCmd = new CreatePostCommand(
+    correlationId,
+    req.body.userId,
+    req.body.tittle,
+    req.body.body,
+  );
+
   const ret = await postService.createPost(createPostCmd);
 
   if (ret.errorResult) {

@@ -6,8 +6,8 @@ services:
   #   restart: always
   #   stdin_open: true 
   #   tty: true  
-    # environment:
-    #   DB_HOST: db 
+  #   environment:
+  #     DB_HOST: db 
   db:
     image: 'postgres:latest'
     ports:

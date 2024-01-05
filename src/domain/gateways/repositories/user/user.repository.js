@@ -12,10 +12,10 @@ const getUsers = async () => {
   return userEntityList(ret.rows);
 };
 
-const getUserById = async (id) => {
+const getUserById = async (createPostCommand) => {
   logger.debug('user.repository - start getUserById');
 
-  const ret = await db.executeSQL(`SELECT * FROM tbl_users WHERE id = ${id}`);
+  const ret = await db.executeSQL(`SELECT * FROM tbl_users WHERE id = ${createPostCommand.userId}`);
 
   logger.debug('user.repository - finish getUserById');
 

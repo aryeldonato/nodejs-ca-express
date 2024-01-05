@@ -5,12 +5,12 @@ const db = require('../domain/infrastructure/db.service');
 
 const port = env.PORT;
 
-server.listen(port, () => {
+server.listen(port, async () => {
   logger.debug('opening db connection');
 
-  db.openConnection();
+  await db.openConnection();
 
-  logger.info(0, `Running on port: ${port}`);
+  logger.info(`Running on port: ${port}`);
 });
 
 function shutdown() {

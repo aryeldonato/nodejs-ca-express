@@ -22,9 +22,13 @@ const returnLogLevel = () => {
 const logger = winston.createLogger({
   level: returnLogLevel(),
   silent: returnLogLevel() === 'OFF',
+  defaultMeta: {
+    service: 'nodejs-ca-express',
+  },
   format: winston.format.combine(
+    winston.format.errors({ stack: true }),
     winston.format.timestamp(),
-    winston.format.printf((info) => `[${info.timestamp}][${info.level}][${info[0]}][${info.message}]`),
+    winston.format.json(),
   ),
   transports: [
     new winston.transports.Console(),
@@ -33,23 +37,23 @@ const logger = winston.createLogger({
 });
 
 const trace = (message) => {
-  logger.silly(message, ['general-logger']);
+  logger.silly(message);
 };
 
 const debug = (message) => {
-  logger.debug(message, ['general-logger']);
+  logger.debug(message);
 };
 
 const info = (message) => {
-  logger.info(message, ['general-logger']);
+  logger.info(message);
 };
 
 const warn = (message) => {
-  logger.warn(message, ['general-logger']);
+  logger.warn(message);
 };
 
 const error = (message) => {
-  logger.error(message, ['general-logger']);
+  logger.error(message);
 };
 
 module.exports = {
