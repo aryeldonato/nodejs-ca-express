@@ -1,8 +1,8 @@
 const request = require('supertest');
 const server = require('../../server');
-const postService = require('../../../domain/use-cases/create-post/create-post.service');
+const createPostUseCase = require('../../../domain/use-cases/create-post/create-post.use-case');
 
-jest.mock('../../../domain/use-cases/create-post/create-post.service');
+jest.mock('../../../domain/use-cases/create-post/create-post.use-case');
 
 beforeAll(() => jest.clearAllMocks());
 afterAll(() => jest.clearAllMocks());
@@ -20,7 +20,7 @@ test('it should receive HTTP 400', async () => {
     title: 'test is cool',
   };
 
-  postService.createPost.mockResolvedValue(createPostMock);
+  createPostUseCase.execute.mockResolvedValue(createPostMock);
 
   const res = await request(server)
     .post('/posts')
@@ -43,7 +43,7 @@ test('it should receive HTTP 200', async () => {
 
   };
 
-  postService.createPost.mockResolvedValue(createPostMock);
+  createPostUseCase.execute.mockResolvedValue(createPostMock);
 
   const res = await request(server)
     .post('/posts')

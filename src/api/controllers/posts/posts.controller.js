@@ -1,5 +1,5 @@
 const express = require('express');
-const postService = require('../../../domain/use-cases/create-post/create-post.service');
+const createPostUseCase = require('../../../domain/use-cases/create-post/create-post.use-case');
 // const logger = require('../../../domain/infrastructure/logger.service');
 const { CreatePostCommand } = require('../../../domain/use-cases/create-post/create-post.command');
 
@@ -15,7 +15,7 @@ router.post('/posts', async (req, res) => {
     req.body.body,
   );
 
-  const ret = await postService.createPost(createPostCmd);
+  const ret = await createPostUseCase.execute(createPostCmd);
 
   if (ret.errorResult) {
     res
